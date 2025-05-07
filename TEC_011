@@ -1,0 +1,81 @@
+# **Runbook - Consultar Jenkins Pipeline en Poseidón**
+
+
+## Introducción
+Este Runbook proporciona instrucciones paso a paso para llevar a cabo una tarea operativa específica dentro del Servicio de Plataforma de Ingeniería. El objetivo es localizar el pipeline erróneo en el servicio de AWS, dentro de Poseidón.
+
+
+## Información del Documento
+**Título del Runbook:** Consultar Jenkins Pipeline en Poseidón  
+**Versión:** 1.0  
+**Fecha de Creación:** 23/04/2025  
+**Fecha de Última Modificación:** 23/04/2025  
+**Autor:** Víctor Márquez Gómez  
+**Revisor:** [Nombre del Revisor]  
+**Aprobador:** [Nombre del Aprobador]  
+
+
+## 1. Información General
+- **Descripción de la Tarea:** Localizar el pipeline erróneo y compartir su ubicación con el servicio que reportó la incidencia.  
+- **Servicio/Sistema Afectado:** DynamoDB, Jenkins, AWS, Poseidón.  
+- **Duración Estimada:** 20 minutos.  
+- **Ventana de Mantenimiento:** N/A  
+- **Riesgos:** No existen riesgos.  
+- **Requisitos Previos:** Identificación de acceso a Jenkins.
+
+
+## 2. Procedimiento Detallado
+**Paso 1:** Se detecta el fallo “Jenkins_pipeline_failed” en el código de logs de AWS.
+
+**Paso 2:** Se buscará el campo “flow type” y se copiará su contenido, en este caso es “clouder-aws-account-create-v2”.
+
+**Paso 3:** Se abrirá una nueva pestaña de AWS y se accederá al servicio “DynamoDB”.
+
+**Paso 3.1:** Una vez dentro del servicio “DynamoDB”, se procederá a buscar la tabla “psdn-jenkins-automatism-lookup”.
+
+**Paso 3.2:** Se accederá a través del botón “Explore table items” al contenido de la misma.
+
+**Paso 3.3:** Se realizará una “Query” incluyendo el “flow type” obtenido en pasos anteriores, se pulsará tecla “Enter” o botón de “Run”.
+
+**Paso 3.4:** Una vez dentro de la partition key, se deberá buscar la ubicación del pipeline que estaba produciendo el error, aparecerá en el apartado llamado “pipeline_name”.
+
+**Paso 4:** Obtenida dicha información, se realizará la comprobación de la misma dentro de la aplicación “Jenkins”. Para ello, previo login, se realizará una búsqueda.
+
+**Paso 4.1:** La búsqueda se realizará por fases, accediendo primero al fichero superior y descendiendo hasta llegar al error.
+
+**Paso 5:** Se le proporcionará al equipo que activó la incidencia la URL de acceso al “pipeline” erróneo para que puedan acceder a él y solucionarlo.
+
+
+**3. Verificación y Validación**
+**Criterios de Éxito:**
+- Localizar el pipeline erróneo y compartir la URL de la ruta.
+
+
+**4. Manejo de Excepciones y Rollback**
+**Posibles Errores y Formas de Solucionarlo:**
+- N/A
+
+**Procedimiento de Rollback:**
+- N/A
+
+
+**5. Comunicación**
+**Partes Interesadas a Notificar:**
+- N1.
+
+**Método de Comunicación:** 
+- Aplicación JIRA (comentarios).
+
+
+**6. Apéndice**
+**Referencias:**
+- N/A
+
+
+## 7. Historial de Revisiones
+
+| Versión | Fecha       | Autor                                      | Descripción de los Cambios                        |
+|---------|-------------|--------------------------------------------|--------------------------------------------------|
+| 1.0     | 23/04/2025   | Víctor Márquez                             | Creación del documento.                          |
+| 1.1     | 29/04/2025    | Samuel Carretero                           | Revisión, la información es correcta.            |
+
